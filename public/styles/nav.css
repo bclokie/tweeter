@@ -1,0 +1,22 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 120px;
+  padding: 1.5em;
+  background: #4056A1;
+  color: #FFFFFF
+}
+
+.titleLeft {
+  font-family: 'Bungee', bold;
+  font-size: xxx-large;
+  align-items: flex-end;
+}
+
+.titleRight i {
+  margin-left: 80px;
+  display: flex;
+  align-items: flex-end;
+  color: red;
+  }
