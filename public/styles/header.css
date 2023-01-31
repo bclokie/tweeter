@@ -5,6 +5,7 @@
   height: 400px;
   width: 100%;
   align-items: center;
+  font-weight: normal;
 }
 
 .username {
