@@ -23,20 +23,5 @@
   }
 
 .fas {
-  color: red
+  color: #FF0000
 }
-
-.header {
-  display: flex;
-  flex-direction: column;
-  padding-top: 120px;
-  height: 400px;
-  width: 100%;
-  align-items: center;
-}
-
-.username {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: normal;
-  color: white
-} 
