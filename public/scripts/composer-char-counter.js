@@ -5,11 +5,11 @@ $(document).ready(function() {
   const $counter = $('.counter');
   
   $($tweetText).on('input', function() {
-    if ($(this).val().length > 140) {
+    /*if ($(this).val().length > 140) {
       $(this).val($(this).val().substring(0, 140));
-    }
+    }*/
     $counter.val(140 - $(this).val().length);
-    if ($counter.val() == 0) {
+    if ($counter.val() <= 0) {
       $counter.addClass('red');
     } else {
       $counter.removeClass('red')
