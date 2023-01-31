@@ -9,6 +9,11 @@ $(document).ready(function() {
       $(this).val($(this).val().substring(0, 140));
     }
     $counter.val(140 - $(this).val().length);
+    if ($counter.val() == 0) {
+      $counter.addClass('red');
+    } else {
+      $counter.removeClass('red')
+    }
   });
   
 });
