@@ -15,12 +15,16 @@
   align-items: flex-end;
 }
 
-.titleRight i {
-  margin-left: 80px;
+.titleRight {
+  margin-left: 12px;
   display: flex;
-  align-items: flex-end;
-  color: red;
+  flex-direction: column;
+  align-items: center;
   }
+
+.fas {
+  color: red
+}
 
 .header {
   display: flex;
