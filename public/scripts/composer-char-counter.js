@@ -10,9 +10,9 @@ $(document).ready(function() {
     }*/
     $counter.val(140 - $(this).val().length);
     if ($counter.val() <= 0) {
-      $counter.addClass('red');
+      $counter.addClass('past-limit');
     } else {
-      $counter.removeClass('red')
+      $counter.removeClass('past-limit');
     }
   });
   

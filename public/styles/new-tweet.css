@@ -35,6 +35,12 @@
   height: 36px;
 }
 
-.red {
+.tweet-button:hover {
+  background-color: #4861b5;
+  transition: 0.1s;
+  cursor: pointer;
+}
+
+.past-limit {
   color: #ff0000
 }
