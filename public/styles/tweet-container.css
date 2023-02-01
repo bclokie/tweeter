@@ -28,7 +28,7 @@
 }
 
 .handle {
-  font-weight: bold;
+  font-weight: normal;
   color: lightgrey;
 }
 
@@ -39,7 +39,12 @@
   padding-left: 1em;
   padding-right: 1em;
   border-top: 4px solid #545149;
-
   display: flex;
   justify-content: space-between;
+}
+
+.fa-solid:hover {
+  color: green;
+  transition: 0.1s;
+  cursor: pointer;
 }
