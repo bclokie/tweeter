@@ -1,6 +1,6 @@
 .tweet-container {
   width: 100%;
-  border: 2px solid red;
+  margin-top: 20px;
 }
 .article-tweet {
   width: 100%;
@@ -21,7 +21,15 @@
   justify-content: space-between;
 }
 
-.article-tweet p {
+.user-info {
+  display: flex;
+}
+
+.user-info p {
+  padding-left: 0.5em;
+}
+
+.article-tweet p.tweet-content {
   font-weight: thin;
   padding-left: 1em;
   padding-right: 1em;
@@ -43,8 +51,16 @@
   justify-content: space-between;
 }
 
+.article-tweet:hover {
+  box-shadow: 4px 4px gray;
+}
+
+.tweet-action-symbols {
+  color: white
+}
+
 .fa-solid:hover {
-  color: green;
+  color: red;
   transition: 0.1s;
   cursor: pointer;
 }
