@@ -57,10 +57,10 @@ $(document).ready(function() {
     $('.new-tweet-error').slideUp('fast');
 
     if ($tweetLength === 0) {
-      const $error = $('<i class="fa-solid fa-triangle-exclamation"></i><h4> You have to tweet something! </h4>');
+      const $error = $('<i class="fa-solid fa-triangle-exclamation"></i><h4> You have to tweet something! </h4><i class="fa-solid fa-triangle-exclamation"></i>');
       $('.new-tweet-error').html($error).slideDown('fast');
     } else if ($tweetLength > 140) {
-      const $error = $('<i class="fa-solid fa-triangle-exclamation"></i><h4> You used more than 140 characters, we only have one rule! </h4>');
+      const $error = $('<i class="fa-solid fa-triangle-exclamation"></i><h4> You used more than 140 characters, we only have one rule! </h4><i class="fa-solid fa-triangle-exclamation"></i>');
       $('.new-tweet-error').html($error).slideDown('fast');
     } else {
       $.post('/tweets', $formInput, () => {
@@ -70,7 +70,7 @@ $(document).ready(function() {
         $('.new-tweet-error').html('');
         loadTweets();
       }).fail(function() {
-        const $error = $('<i class="fa-solid fa-triangle-exclamation"></i><h4>Something went wrong in the server.</h4>');
+        const $error = $('<i class="fa-solid fa-triangle-exclamation"></i><h4>Something went wrong...</h4><i class="fa-solid fa-triangle-exclamation"></i>');
         $('.new-tweet-error').html($error);
       });
     }
