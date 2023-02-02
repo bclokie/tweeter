@@ -33,7 +33,7 @@ $(document).ready(function() {
   const renderTweets = function(tweetArr) {
     for (const tweetObj of tweetArr) {
       let result = createTweetElement(tweetObj);
-      $('#tweet-container').append(result);
+      $('#tweet-container').prepend(result);
     }
   };
 
@@ -53,12 +53,17 @@ $(document).ready(function() {
     } else if ($tweetLength > 140) {
       alert("You typed too much!");
     } else {
-      $.post('/tweets', $formInput);
-    }  });
+      $.post('/tweets', $formInput, () => {
+        loadTweets();
+      });
+    }
+
+  });
 
   // >>> REQUEST TWEETS FROM DATABASE
-  const loadTweets = function() {
+  const loadTweets = () => {
     $.get('http://localhost:8080/tweets', (data) => {
+      $('#tweet-container').empty();
       renderTweets(data);
     });
   };
