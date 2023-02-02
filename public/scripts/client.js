@@ -6,6 +6,12 @@
 
 $(document).ready(function() {
 
+  const escape = function(str) {
+    let div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
+
   // >>> CREATE INDIVIDUAL TWEET ELEMENT FROM DB
   const createTweetElement = function(tweetObj) {
     const $tweetElement = `
@@ -17,7 +23,7 @@ $(document).ready(function() {
           </span>
           <span class="user-handle">${tweetObj.user.handle}</span>
         </header>
-        <p class="tweet-content">${tweetObj.content.text}</p>
+        <p class="tweet-content">${escape(tweetObj.content.text)}</p>
         <footer>
         <span>${timeago.format(tweetObj.created_at)}</span>          <span class="tweet-action-symbols">
             <i class="fa-solid fa-flag"></i>
@@ -40,21 +46,32 @@ $(document).ready(function() {
   // >>> EVENT LISTENER FOR NEW TWEET FORM SUBMISSION
   const $newTweetForm = $('.new-tweet-form');
 
-  $($newTweetForm).submit(function(event) {
+  $newTweetForm.submit(function(event) {
     event.preventDefault();
     const $formInput = $(this).serialize();
 
     // >>> FORM VALIDATION & POST REQUEST
 
     const $tweetLength = $('#tweet-text').val().length;
+    
+    $('.new-tweet-error').slideUp('fast');
 
     if ($tweetLength === 0) {
-      alert("You didn't type anthing!");
+      const $error = $('<i class="fa-solid fa-triangle-exclamation"></i><h4> You have to tweet something! </h4>');
+      $('.new-tweet-error').html($error).slideDown('fast');
     } else if ($tweetLength > 140) {
-      alert("You typed too much!");
+      const $error = $('<i class="fa-solid fa-triangle-exclamation"></i><h4> You used more than 140 characters, we only have one rule! </h4>');
+      $('.new-tweet-error').html($error).slideDown('fast');
     } else {
       $.post('/tweets', $formInput, () => {
+        $('#tweet-text').val('');
+        $(".counter").val("140");
+        $('.new-tweet-error').slideUp('fast');
+        $('.new-tweet-error').html('');
         loadTweets();
+      }).fail(function() {
+        const $error = $('<i class="fa-solid fa-triangle-exclamation"></i><h4>Something went wrong in the server.</h4>');
+        $('.new-tweet-error').html($error);
       });
     }
 

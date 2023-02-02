@@ -36,11 +36,17 @@
 }
 
 .tweet-button:hover {
-  background-color: #4861b5;
+  background-color: #5674d6;
   transition: 0.1s;
   cursor: pointer;
 }
 
 .past-limit {
   color: #ff0000
+}
+
+.new-tweet-error {
+  color: #ff0000;
+  display: flex;
+  align-items: center;
 }
