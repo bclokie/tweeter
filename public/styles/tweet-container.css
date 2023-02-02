@@ -1,4 +1,4 @@
-.tweet-container {
+#tweet-container {
   width: 100%;
   margin-top: 20px;
 }
@@ -11,6 +11,7 @@
   padding-right: 0.5em;
   display: flex;
   flex-direction: column;
+  margin-top: 8px;
 }
 
 .article-tweet header {

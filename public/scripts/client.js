@@ -6,7 +6,7 @@
 
 $(document).ready(function() {
 
-  const tweetData = [
+  /*const tweetData = [
     {
       "user": {
         "name": "Newton",
@@ -30,7 +30,7 @@ $(document).ready(function() {
       },
       "created_at": 1461113959088
     }
-  ];
+  ];*/
 
 
   // >>> CREATE INDIVIDUAL TWEET ELEMENT FROM DB
@@ -61,11 +61,27 @@ $(document).ready(function() {
   const renderTweets = function(tweetArr) {
     for (const tweetObj of tweetArr) {
       let result = createTweetElement(tweetObj);
-      $('.tweet-container').append(result);
+      $('#tweet-container').append(result);
     }
   };
 
-  // >>> CALL RENDER FUNCTION ON LOAD
-  renderTweets(tweetData);
+  // >>> EVENT LISTENER FOR NEW TWEET FORM SUBMISSION
+  const $newTweetForm = $('.new-tweet-form');
 
-});
+  $($newTweetForm).submit(function(event) {
+    event.preventDefault();
+    const $formInput = $(this).serialize();
+
+    $.post('/tweets', $formInput);
+  });
+
+  // >>> REQUEST TWEETS FROM DATABASE
+  const loadTweets = function() {
+    $.get('http://localhost:8080/tweets', (data) => {
+      renderTweets(data);
+    });
+  };
+
+  loadTweets();
+
+});  
