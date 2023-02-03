@@ -3,6 +3,7 @@
  * https://css-tricks.com/international-box-sizing-awareness-day/
  * Do not modify these two selectors, please
  */
+
 html {
   box-sizing: border-box;
 }
@@ -16,12 +17,11 @@ html {
 
 body {
   color: #545149;
-  background-color: #f4f1ec;
   font-size: 24px;
-  font-family: 'Bungee', bold;
+  font-family: 'Bungee', cursive;
   font-family: 'Source Sans Pro', sans-serif;
   background-color: darkblue;
-  background-image: url("/images/background3.png")
+  background-image: url("/images/background.png")
 }
 
 /*
@@ -31,7 +31,17 @@ body {
  main {
   margin: auto;
   width: 90%;
-  padding-top: 120px;
+  padding-top: 15px;
   align-items: center;
   color: white;
+}
+
+@media screen and (min-width: 1024px) {
+  body {
+    display:flex;
+  }
+  main {
+    width: 60%;
+    padding: 170px 40px 0px 100px
+  }
 }

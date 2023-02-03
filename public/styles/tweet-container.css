@@ -1,67 +1,46 @@
-#tweet-container {
-  width: 100%;
-  margin-top: 20px;
-}
-.article-tweet {
-  width: 100%;
-  border: 5px solid #545149;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  display: flex;
-  flex-direction: column;
-  margin-top: 8px;
+article.tweet {
+  border-style: solid;
+  border-width: 3px;
+  border-color: #545149;
+  padding: 20px;
+  margin: 20px 0px 20px 0px;
 }
 
-.article-tweet header {
-  padding-bottom: 1em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+article img {
+  max-width: 25%;
+  vertical-align:middle; 
+}
+
+.tweet header{
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
+  height: 0px;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  background-color: darkblue;
 }
 
-.user-info {
-  display: flex;
-}
-
-.user-info p {
-  padding-left: 0.5em;
-}
-
-.article-tweet p.tweet-content {
-  font-weight: thin;
-  padding-left: 1em;
-  padding-right: 1em;
-}
-
-.handle {
-  font-weight: normal;
-  color: lightgrey;
-}
-
-.article-tweet footer {
-  font-size: 12pt;
-  font-weight: bold;
-  padding-top: 1em;
-  padding-left: 1em;
-  padding-right: 1em;
-  border-top: 4px solid #545149;
+.tweet footer{
   display: flex;
   justify-content: space-between;
+  font-size: 18px;
+  flex-direction: row;
+  padding: 13px 13px 0px 6px
 }
 
-.article-tweet:hover {
-  box-shadow: 4px 4px gray;
-}
-
-.tweet-action-symbols {
-  color: white
+article.tweet:hover {
+  box-shadow: 5px 5px gray;
 }
 
 .fa-solid:hover {
   color: red;
-  transition: 0.1s;
-  cursor: pointer;
+}
+
+@media screen and (min-width: 1024px) {
+  .tweet header {
+    width: 100%;
+    margin: 0;
+    padding: 20px 0px 60px 0px;
+  }
 }

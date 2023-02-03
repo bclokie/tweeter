@@ -1,27 +1,34 @@
-.nav {
+nav {
   display: flex;
   justify-content: space-between;
+  position: fixed;
   width: 100%;
   height: 120px;
   padding: 1.5em;
   background: #4056A1;
   color: #FFFFFF;
-  position: fixed;
 }
 
-.titleLeft {
-  font-family: 'Bungee', bold;
-  font-size: xxx-large;
-  align-items: flex-end;
+.title-left {
+  font-family: 'Bungee', cursive;
+  font-size: 50px;
 }
 
-.titleRight {
-  margin-left: 12px;
+.title-right {
   display: flex;
   flex-direction: column;
   align-items: center;
-  }
+  font-family: 'Source Sans Pro', sans-serif;
+}
 
-.fas {
-  color: #FF0000
+.fa-angles-down {
+  color: #f00;
+}
+
+
+@media screen and (min-width: 1024px) {
+  nav {
+    background: #4056A1;
+    background-image: none;
+  }
 }
