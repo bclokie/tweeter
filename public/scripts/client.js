@@ -22,11 +22,10 @@ const escape = function (str) {
 const createTweetElement = (tweet) => {
   const timeAgo = timeago.format(tweet.created_at);
   const safeHTML = `<p class="tweet-text">${escape(tweet.content.text)}</p>`;
-  //tweet.created_at
   const newTweet = $(`<article class="tweet">
     <header>
       <div>
-        <img src="${tweet.user.avatars}">
+        <img class="user-avatars" src="${tweet.user.avatars}">
         <span>&nbsp;&nbsp;${tweet.user.name}</span>
       </div>
       <div>
