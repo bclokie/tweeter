@@ -4,87 +4,97 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-$(document).ready(function() {
+/*
+ * Client-side JS logic goes here
+ * jQuery is already loaded
+ * Reminder: Use (and do all your DOM work in) jQuery's document ready function
+ */
 
-  const escape = function(str) {
-    let div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-  };
+// Test / driver code (temporary). Eventually will get this from the server.
 
-  // >>> CREATE INDIVIDUAL TWEET ELEMENT FROM DB
-  const createTweetElement = function(tweetObj) {
-    const $tweetElement = `
-      <article class="article-tweet">
-        <header>
-          <span class="user-info">
-            <img src="${tweetObj.user.avatars}"/>
-            <p>${tweetObj.user.name}</p>
-          </span>
-          <span class="user-handle">${tweetObj.user.handle}</span>
-        </header>
-        <p class="tweet-content">${escape(tweetObj.content.text)}</p>
-        <footer>
-        <span>${timeago.format(tweetObj.created_at)}</span>          <span class="tweet-action-symbols">
-            <i class="fa-solid fa-flag"></i>
-            <i class="fa-solid fa-retweet"></i>
-            <i class="fa-solid fa-heart"></i>
-          </span>
-        </footer>
-      </article>`;
-    return $tweetElement;
-  };
+const escape = function (str) {
+  let div = document.createElement("div");
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
 
-  // >>> LOOP THROUGH DATABASE, APPEND EACH ELEMENT TO TWEET CONTAINER
-  const renderTweets = function(tweetArr) {
-    for (const tweetObj of tweetArr) {
-      let result = createTweetElement(tweetObj);
-      $('#tweet-container').prepend(result);
-    }
-  };
 
-  // >>> EVENT LISTENER FOR NEW TWEET FORM SUBMISSION
-  const $newTweetForm = $('.new-tweet-form');
+const createTweetElement = (tweet) => {
+  const timeAgo = timeago.format(tweet.created_at);
+  const safeHTML = `<p class="tweet-text">${escape(tweet.content.text)}</p>`;
+  //tweet.created_at
+  const newTweet = $(`<article class="tweet">
+    <header>
+      <div>
+        <img src="${tweet.user.avatars}">
+        <span>&nbsp;&nbsp;${tweet.user.name}</span>
+      </div>
+      <div>
+        ${tweet.user.handle}
+      </div>
+    </header>
+     ${safeHTML}
+    <footer>
+      <div>
+        ${timeAgo}
+      </div>
+      <div>
+        <i class="fa-solid fa-flag"></i>
+        <i class="fa-solid fa-retweet"></i>
+        <i class="fa-solid fa-heart"></i>
+      </div>
+    </footer>
+  </article>`);
+  return newTweet;
+};
 
-  $newTweetForm.submit(function(event) {
-    event.preventDefault();
-    const $formInput = $(this).serialize();
-
-    // >>> FORM VALIDATION & POST REQUEST
-
-    const $tweetLength = $('#tweet-text').val().length;
-    
-    $('.new-tweet-error').slideUp('fast');
-
-    if ($tweetLength === 0) {
-      const $error = $('<i class="fa-solid fa-triangle-exclamation"></i><h4> You have to tweet something! </h4><i class="fa-solid fa-triangle-exclamation"></i>');
-      $('.new-tweet-error').html($error).slideDown('fast');
-    } else if ($tweetLength > 140) {
-      const $error = $('<i class="fa-solid fa-triangle-exclamation"></i><h4> You used more than 140 characters, we only have one rule! </h4><i class="fa-solid fa-triangle-exclamation"></i>');
-      $('.new-tweet-error').html($error).slideDown('fast');
-    } else {
-      $.post('/tweets', $formInput, () => {
-        $('#tweet-text').val('');
-        $(".counter").val("140");
-        $('.new-tweet-error').slideUp('fast');
-        $('.new-tweet-error').html('');
-        loadTweets();
-      }).fail(function() {
-        const $error = $('<i class="fa-solid fa-triangle-exclamation"></i><h4>Something went wrong...</h4><i class="fa-solid fa-triangle-exclamation"></i>');
-        $('.new-tweet-error').html($error);
-      });
-    }
-
+const renderTweets = (data) => {
+  $("#tweets-container").empty();
+  data.forEach((user) => {
+    const $tweet = createTweetElement(user);
+    $("#tweets-container").prepend($tweet);
   });
+  return;
+};
 
-  // >>> REQUEST TWEETS FROM DATABASE
-  const loadTweets = () => {
-    $.get('http://localhost:8080/tweets', (data) => {
-      $('#tweet-container').empty();
-      renderTweets(data);
-    });
-  };
+const loadTweets = () => {
+  const $tweets = $.get("/tweets/", (allTweets) => {
+    renderTweets(allTweets);
+  });
+};
 
+const hideErrorMessages = () => {
+  $(".error-message").hide(() => {});
+};
+
+const showMessage = (id) => {
+  $(id).slideDown("fast", () => {});
+};
+
+
+$(() => {
+  hideErrorMessages();
   loadTweets();
+  showMessage();
 
-});  
+  $("form").submit((e) => {
+    e.preventDefault();
+    const tweetContentValue = $("#tweet-post").val();
+    const tweetContentSerialized = $("#tweet-post").serialize();
+
+    hideErrorMessages();
+    if (!tweetContentValue) {
+      showMessage('#empty-field');
+      return;
+    }
+    if (tweetContentValue.length > 140) {
+      showMessage('#field-too-long');
+      return;
+    }
+    $.post("/tweets", tweetContentSerialized, () => {
+      loadTweets();
+    });
+    $("#tweet-post").val('');
+    $("#tweet-counter").html(140);
+  });
+});
