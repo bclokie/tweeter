@@ -4,8 +4,8 @@ Tweeter is a simple, single-page Twitter clone.
 
 ## Screenshots
 
-![Screenshot of Desktop View](https://github.com/bclokie/tweeter/blob/master/public/images/landscape-view.png)
-![Screenshot of Mobile View](https://github.com/bclokie/tweeter/blob/master/public/images/portrait-view.png)
+!["Screenshot of Desktop View"](https://github.com/bclokie/tweeter/blob/master/public/images/landscape-view.png)
+!["Screenshot of Mobile View"](https://github.com/bclokie/tweeter/blob/master/public/images/portrait-view.png)
 
 
 ## Getting Started
